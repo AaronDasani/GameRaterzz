@@ -1,0 +1,60 @@
+@model UserProfileBundle
+
+
+<div class="text-left ml-5 mt-3 mb-3 backBtn">
+    <a href="~/Home" class="btn btn-dark ml-2 ">Back</a>
+</div>
+
+<div class="container ProfileBg p-4">
+
+    <div class="profileInfo row mb-5">
+  
+        <div class="ProfilePic col-3">
+            <img src="~/images/profilePic.jpg" alt="" srcset="">
+        </div>
+
+        <div class="col-9 details">
+            <h1>Hello @Model.current_user.firstname @Model.current_user.lastname</h1>
+            <small  class="ml-2"> <span class="text-light"><i class="far fa-envelope"></i> Email:</span> @Model.current_user.email</small>
+        </div>
+        
+        
+    </div>
+
+    <hr>
+    <div class="gameReviewed">
+        <h4 class="bg-danger text-white p-3 rounded">Games You Reviewed</h4>
+        @if(Model.current_user.reviews.Count>0)
+        {
+            <div class="ReviewedGamesSwiper-container">
+                <div class="swiper-wrapper mb-3">
+                    @foreach(var game in Model.current_user.reviews)
+                    {
+                        @if(game.reviewedGames.cover==null)
+                        {
+                            <div class="swiper-slide">
+                                <img src="~/images/big_unvailable-image.jpg" alt="unvailable game pic" srcset="">
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="swiper-slide">
+                                <a href="ShowGame/@game.reviewedGames.gameId"><img src="//images.igdb.com/igdb/image/upload/t_cover_big/@game.reviewedGames.cover.image_id@Html.Raw(".jpg")" alt="game picture" srcset="" class="screenshot rounded"></a>
+                            </div>
+                        }
+                        
+                    }
+
+                </div>
+                <div class="mt-5"></div>
+                <!-- Add Pagination -->
+                <div class="swiper-pagination d-block mt-4"></div>
+            </div>
+        }
+        else
+        {
+            <h5 class="bg-dark text-light p-2 rounded col-4 text-center ml-3">No Games Reviewed</h5>
+        }
+    </div>
+</div>
+

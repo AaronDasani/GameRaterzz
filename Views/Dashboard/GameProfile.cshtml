@@ -1,0 +1,195 @@
+
+@model GameProfileBundle
+<title>@Model.game.name</title>
+<div class="text-left ml-5 mt-3">
+    <a href="~/Home" class="btn btn-dark ">Back</a>
+</div>
+@if(Model.game.videos.Count>0)
+{
+
+
+    <div class="VideoSwiper-container">
+        <div class="swiper-wrapper">
+            @foreach(var video in Model.game.videos)
+            {
+                <div class="swiper-slide">
+                    <div class="videoHolder mt-5 ml-5 mr-5" preload="auto">
+                        <iframe id="vjs_video_2128_Youtube_api" 
+                        class="vjs-tech" frameborder="0" allowfullscreen="1" 
+                        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" 
+                        title="YouTube video player" width="640" height="360" 
+                        src="https://www.youtube.com/embed/@video.video_id?controls=0&amp;modestbranding=1&amp;rel=0&amp;showinfo=0&amp;loop=0&amp;fs=0&amp;hl=en&amp;iv_load_policy=3&amp;enablejsapi=1&amp;origin=https%3A%2F%2Fwww.igdb.com&amp;widgetid=1"
+                        ></iframe>
+                    </div>
+                </div>
+            }
+        </div>
+        <!-- Add Pagination -->
+        <div class="VideoSwiper-pagination"></div>
+        <!-- Add Arrows -->
+        <div class="swiper-button-next"><i class="fas fa-angle-right"></i></div>
+        <div class="swiper-button-prev"><i class="fas fa-angle-left"></i></div>
+    </div>
+}
+else
+{
+    <div class="BigUnavailbleImageSection mt-4">
+        <img src="~/images/video-unavailable.jpg" alt="game picture" srcset="" class="rounded ">
+    </div>
+}
+<div class="ml-5 mr-5 GameBio">
+   
+    <div class="gameCover d-inline-block">
+        @if(Model.game.cover!=null)
+        {
+            <img src="//images.igdb.com/igdb/image/upload/t_cover_big/@Model.game.cover.image_id@Html.Raw(".jpg")" alt="game picture" srcset="" class="rounded">
+
+        }
+        else
+        {
+            <img src="~/images/small_unavailable-image.png" alt="game picture" srcset="" class="rounded">
+        }
+    </div>
+    <div class="gameDetails d-inline-block col-6">
+        <div class="ml-3 mt-3">
+            <h2 class="text-light mb-0">@Model.game.name</h2>
+            <small class="ml-2 mt-2 mb-1 font-weight-bold text-secondary d-block">
+                Release Dates:
+                <span class="font-weight-light text-warning">@Model.game.release_date.ToString("MMMM dd, yyyy")</span>
+            </small>
+            <small class="ml-2 mb-1 font-weight-bold text-secondary d-block">
+                Genres:
+                @foreach(var item in Model.game.game_Genres)
+                {
+                    <span class="font-weight-light text-warning mr-1">@item.genre.name </span>
+                }
+            </small>
+            <small class="ml-2 mb-1 font-weight-bold text-secondary d-block">
+                Platforms:
+                @foreach(var item in Model.game.game_Platforms)
+                {
+                    <span class="font-weight-light text-warning">@item.platform.name</span>
+                }
+            </small>
+            <p class="mt-2 ml-3 summary">@Model.game.summary</p>
+        </div>
+    </div>
+    <div class="ratingSection d-inline-block mt-4">
+        @if(Model.game.rating==0)
+        {
+            <svg class="radial-progress" viewBox="0 0 80 80">
+                <circle  class="incomplete" cx="40" cy="40" r="35"></circle>
+                <circle  class="complete" cx="40" cy="40" r="35" style="stroke-dashoffset: 39.58;"></circle>
+                <text class="percentage" x="50%" y="57%" transform="matrix(0, 1, -1, 0, 80, 0)">No Rating</text>
+            </svg>
+            
+        }
+        else
+        {
+            <svg class="radial-progress" data-percentage="@Model.game.rating.ToString("0.0")" viewBox="0 0 80 80">
+                <circle class="incomplete" cx="40" cy="40" r="35"></circle>
+                <circle class="complete" cx="40" cy="40" r="35" style="stroke-dashoffset: 39.58;"></circle>
+                <text class="percentage" x="50%" y="57%" transform="matrix(0, 1, -1, 0, 80, 0)">@Model.game.rating.ToString("0.0")%</text>
+                <text class="ratingtext" x="50%" y="70%" transform="matrix(0, 1, -1, 0, 80, 0)">rating</text>
+            </svg>
+        }
+        
+    </div>
+    <div class="expansionSection mt-3">
+        @if(@Model.game.expansions.Count>0)
+        {
+            <h2 class="font-weight-bold text-center bg-dark text-white py-1 pr-2 pl-2 mb-3">Expansions</h2>    
+            <div class="ExpansionSwiper-container">
+                <div class="swiper-wrapper">
+                    
+                    @foreach(var expansion in Model.game.expansions)
+                    {
+                        <div class="swiper-slide">
+                            <a href="~/ShowGame/@expansion.id"><img src="//images.igdb.com/igdb/image/upload/t_cover_big/@expansion.cover.image_id@Html.Raw(".jpg")" alt="game picture" srcset="" class="screenshot rounded"></a>
+                        </div>
+                    }
+                </div>
+                <div class="mt-5"></div>
+                <!-- Add Pagination -->
+                <div class="ExpansionSwiper-pagination"></div>
+            </div>
+        }
+    </div>
+    <hr>
+    <div class="container">
+        <div class="ReviewSection mt-4 p-4">
+            <div>
+                <h4 class="text-center p-1 mb-0 mt-2">Join The Conversation</h4>
+                <h3 class="text-center mt-0 mb-0"><i class="fas fa-caret-down dropdown"></i></h3>
+                <div class="reviewContent">
+                    <div class="ReviewPostSection">
+                        <form action="~/addReview" method="post">
+                            <div class="form-group">
+                                <textarea asp-for="formReview.text" placeholder="place a review ..." class="form-control p-2" cols="30" rows="3"></textarea>
+                                <input type="hidden" asp-for="formReview.gameId" value="@Model.game.gameId">
+                                <small class="d-block"><span asp-validation-for="formReview.text" class="text-danger font-weight-bold"></span></small>
+                                <div class="text-right mt-2"><button type="submit" class="btn btn-outline-danger">Post</button></div>
+                            </div>
+
+                        </form>
+                    </div>
+                    <hr>
+                    <div class="ListOfReviews">
+                        @foreach(var review in Model.game.Reviews)
+                        {
+                            <div class="reviewBox  p-1 mt-3">
+                                <div class="row">
+                                    <div class="col-9">
+                                        <small class="font-weight-bold badge badge-danger">@review.reviewer.firstname @review.reviewer.lastname</small>
+                                    </div>
+                                    <div class="col-3 text-right">
+                                        <small class=" text-muted">@review.reviewer.created_at.ToString("MMMM dd, yyyy")</small>    
+                                    </div>
+                                </div>
+                                <p class="font-weight-light ml-1 mt-2 mb-1">@review.text</p>
+                                <div class="row mt-1 showInfo">
+                                   <div class="col-8 ">
+                                       <small class="text-muted"> <span>@review.likeCounts.Count</span> people like this</small>
+                                   </div>
+                                   <div class="col-4 text-right">
+                                       <small>
+                                           <a href="~/viewComments/@review.review_id" class="text-light viewComments">View <span>@review.responses.Count</span> Comments</a>
+                                        </small>
+                                   </div>
+                                </div>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-9">
+                                        <a href="~/like/@review.review_id/@review.likeCounts.Count" class="like pt-1">
+                                            <i class="far fa-heart "></i> <span> Like</span>
+                                        </a>
+                                        <a href="#" class=" ml-4 commentBtn"> REPLY</a>
+                                    </div>
+                                    <div class="col-3 text-right">
+                                        
+                                    </div>
+                                    
+                                </div>
+                                <div class="CommentPostSection mt-3">
+                                    <form action="~/addComment" method="post" class="CommentForm">
+                                        <div class="form-group">
+                                            <textarea asp-for="Comment.response" placeholder="place a comment ..." class="form-control p-2" cols="20" rows="2"></textarea>
+                                            <input type="hidden" asp-for="Comment.review_id" value="@review.review_id">
+                                            <small class="d-block"><span asp-validation-for="Comment.response" class="text-danger font-weight-bold"></span></small>
+                                            <div class="text-right mt-2"><button type="submit" class="btn btn-danger btn-sm">Comment</button></div>
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="listOfComments mt-3"> </div>
+                                
+                            </div>
+                        }
+                    </div>
+                    
+                </div>
+            </div>
+            
+            
+        </div>
+    </div>
+</div>

@@ -1,0 +1,12 @@
+
+
+
+appsettings.json
+
+bin/
+
+obj/
+
+.vscode/
+
+wwwroot/lib/

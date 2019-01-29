@@ -1,0 +1,81 @@
+@model LogAndRegUserBundle
+<header class="masthead mb-auto">
+        <div class="inner">
+            <div class="row">
+                <h3 class="masthead-brand text-light col-4">GameRaterzz</h3>
+                <nav class="col-8 text-right">
+                    <a class="navigation" href="#">Registration</a>
+                    <a class="navigation" href="#">Login</a>
+                    <a class="navigation " href="#">Contact</a>
+                </nav>
+            </div>
+            
+        </div>
+</header>
+<div class="text-light p-3 pb-5 background">
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-6 mr-5">
+                <h4 class="text-center mt-5">Register to GameRaterzz</h4>
+                <hr>
+                
+                <div class="form">
+                    <form action="registration_process" method="post" class="mt-3">
+                        <div class="form-group">
+                            <label asp-for="register_user.firstname"></label>
+                            <input asp-for="register_user.firstname" class="form-control">
+                            <small class="d-block"><span asp-validation-for="register_user.firstname" class="text-danger font-weight-bold"></span></small>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="register_user.lastname"></label>
+                            <input asp-for="register_user.lastname"  class="form-control"> 
+                            <small class="d-block"><span asp-validation-for="register_user.lastname" class="text-danger font-weight-bold"></span></small>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="register_user.email"></label>
+                            <input asp-for="register_user.email"  class="form-control">
+                            <small class="d-block"><span asp-validation-for="register_user.email" class="text-danger font-weight-bold"></span></small>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="register_user.password"></label>
+                            <input asp-for="register_user.password" class="form-control">
+                            <small class="d-block"><span asp-validation-for="register_user.password" class="text-danger font-weight-bold"></span></small>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="register_user.confirmPassword"></label>
+                            <input asp-for="register_user.confirmPassword" class="form-control">
+                            <small class="d-block"><span asp-validation-for="register_user.confirmPassword" class="text-danger font-weight-bold"></span></small>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-dark d-block col-12">Register</button>
+                        
+                    </form>
+                    
+                </div>
+            </div>
+            <div class="col-4 ml-5">
+                <div class="loginForm">
+                    <h4 class="text-center mt-5">Login to GameRaterzz</h4>
+                    <hr>
+                    <form action="login_process" method="post" class="mt-3">
+                        
+                        <div class="form-group">
+                            <label asp-for="login_user.LoginEmail"></label>
+                            <input asp-for="login_user.LoginEmail"  class="form-control">
+                            <small class="d-block"><span asp-validation-for="login_user.LoginEmail" class="text-danger font-weight-bold"></span></small>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="login_user.LoginPassword"></label>
+                            <input asp-for="login_user.LoginPassword" class="form-control">
+                            <small class="d-block"><span asp-validation-for="login_user.LoginPassword" class="text-danger font-weight-bold"></span></small>
+                        </div>
+                        <button type="submit" class="btn btn-dark d-block col-12">Login</button>
+                    </form>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+        
+     
+</div>

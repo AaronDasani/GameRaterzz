@@ -1,0 +1,96 @@
+
+
+/* ---------------------for the Navbar Only------------- */
+
+/* Links */
+a,
+a:focus,
+a:hover {
+  color: #fff;
+}
+
+/* Custom default button */
+.btn-secondary,
+.btn-secondary:hover,
+.btn-secondary:focus {
+  color: #333;
+  text-shadow: none; /* Prevent inheritance from `body` */
+  background-color: #fff;
+  border: .05rem solid #fff;
+}
+
+/*
+ * Header
+ */
+.masthead {
+  margin-bottom: 2rem;
+  padding: 15px;
+}
+
+.masthead-brand {
+  margin-bottom: 0;
+}
+
+.navigation {
+  padding: .25rem 0;
+  font-weight: 700;
+  color: rgba(255, 255, 255, .5);
+  background-color: transparent;
+  border-bottom: .25rem solid transparent;
+}
+
+.navigation:hover,
+ .navigation:focus {
+  border-bottom-color: rgba(255, 255, 255, .25);
+  text-decoration: none;
+}
+
+ .navigation + .navigation {
+  margin-left: 1rem;
+}
+
+.active {
+  color: #fff;
+  border-bottom-color: #fff;
+}
+
+
+
+.LoginAndRegisterBg{
+  background-image: url(../images/gamingBg.jpg);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+.LoginAndRegisterBg form{
+  font-family: 'Roboto Condensed', sans-serif;
+}
+.LoginAndRegisterBg footer{
+  margin-top: 300px !important;
+}
+
+
+
+
+@media screen and (max-width: 755px) {
+
+  /* .LoginAndRegisterBg h4{
+    color: red !important;
+  } */
+  .background .row div{
+    flex: none;
+    max-width: 100% !important;
+    margin-right: 0px !important;
+    margin-left: 0px !important;
+  }
+
+}
+@media screen and (max-width: 415px) {
+
+ 
+  .masthead .row h3, .masthead .row nav{
+    margin-top: 10px;
+    flex: none;
+    max-width: 100% !important;
+    text-align: center !important;
+  }
+}
