@@ -30,7 +30,9 @@ a:hover {
 .masthead-brand {
   margin-bottom: 0;
 }
-
+.masthead-brand a:hover{
+  text-decoration: none;
+}
 .navigation {
   padding: .25rem 0;
   font-weight: 700;
@@ -54,6 +56,76 @@ a:hover {
   border-bottom-color: #fff;
 }
 
+/* ----helper tag effect -----*/
+.helperTag{
+  position: absolute;
+  left: 100px;
+}
+.notification{
+  position: relative;
+  bottom: 25px;
+  left: 53px;
+  color: white;
+  font-size: 10px;
+}
+svg {
+  width: 50px;
+  height: 50px; 
+  margin: 0 auto;
+  transform: rotate(110deg) scaleX(-1);
+}
+.draw-arrow {  
+  stroke-width: 1;
+  stroke: rgb(201, 201, 201); 
+  fill: none;
+  stroke-dasharray: 400;
+  stroke-dashoffset: 400; 
+  animation-duration: 2.0s;
+  animation-fill-mode: forwards;
+  animation-name: draw;
+  animation-delay: 0.5s;
+}
+.tail-1 {
+animation-delay: 1s;
+}
+.tail-2 {
+animation-delay: 1.2s;
+}
+
+
+@keyframes draw {
+  to {
+      stroke-dashoffset: 0;
+  }
+
+}
+svg+div small{
+  color: #d4d4d4;
+  font-family: 'ZCOOL KuaiLe', cursive;
+  font-size: 17px;
+}
+
+svg+div{
+  animation: shake 1s linear 0.7s ;
+}
+@keyframes shake {
+  0% { transform: translate(1px, 1px) rotate(0deg); }
+  10% { transform: translate(-1px, -2px) rotate(-1deg); }
+  20% { transform: translate(-3px, 0px) rotate(1deg); }
+  30% { transform: translate(3px, 2px) rotate(0deg); }
+  40% { transform: translate(1px, -1px) rotate(1deg); }
+  50% { transform: translate(-1px, 2px) rotate(-1deg); }
+  60% { transform: translate(-3px, 1px) rotate(0deg); }
+  70% { transform: translate(3px, 1px) rotate(-1deg); }
+  80% { transform: translate(-1px, -1px) rotate(1deg); }
+  90% { transform: translate(1px, 2px) rotate(0deg); }
+  100% { transform: translate(1px, -2px) rotate(-1deg); }
+}
+
+
+
+
+/* ----end------ */
 
 
 .LoginAndRegisterBg{
@@ -67,7 +139,6 @@ a:hover {
 .LoginAndRegisterBg footer{
   margin-top: 300px !important;
 }
-
 
 
 

@@ -17,6 +17,26 @@ namespace GameStarz
         }
         
         [HttpGet("")]
+        public IActionResult DecidingPage(){
+
+            return View("decidingPage");
+        }
+        
+        [HttpGet("recruiterAccess")]
+        public IActionResult RecruiterAccess(){
+
+            var databaseUser=dbContext.Users.FirstOrDefault(u=>u.email=="aaron@gmail.com");
+            if (databaseUser==null)
+            {
+                databaseUser=dbContext.Users.FirstOrDefault();
+                
+            }
+            HttpContext.Session.SetInt32("user_id",(int)databaseUser.user_id);
+
+            return RedirectToAction("Home","Dashboard");
+
+        }
+
         [HttpGet("LoginAndRegister")]
         public IActionResult LoginAndRegister(){
 
